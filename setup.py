@@ -4,7 +4,7 @@ from setuptools import setup
 
 """
 Usage:
-Use setuptools and put cython_setuptools in your setup_requires.
+Use setuptools and put setuptools_cython in your setup_requires.
 Also paste the monkey-patch reversal below.
 
 setuptools DWIM monkey-patch madness
@@ -34,9 +34,9 @@ if 'setuptools.extension' in sys.modules:
 setup(
         name = "example",
         version = "0.1",
-        description="cython_setuptools example",
+        description="setuptools_cython example",
         setup_requires=[
-            'cython_setuptools',
+            'setuptools_cython',
             ],
         ext_modules=[
             Extension('example', ['example.pyx']),
@@ -46,15 +46,15 @@ setup(
 """
 
 setup(
-        name='cython-setuptools',
+        name='setuptools_cython',
         version='0.1',
         author='Gabriel de Perthuis',
         author_email='g2p.code@gmail.com',
         description='Cython setuptools integration',
         license='http://www.gnu.org/licenses/gpl-2.0.html',
         long_description='Allows using Cython in setuptools projects\n'
-        +'by putting cython-setuptools in your setup_requires.\n',
-        py_modules=['cython_setuptools', ],
+        +'by putting setuptools_cython in your setup_requires.\n',
+        py_modules=['setuptools_cython', ],
         install_requires=[
             'Cython',
             ],
@@ -78,11 +78,11 @@ setup(
             # parameter.
 
             'distutils.commands': [
-                #'build_cython = cython_setuptools:build_cython',
+                #'build_cython = setuptools_cython:build_cython',
                 ],
             'distutils.setup_keywords': [
-                'ext_modules = cython_setuptools:ext_modules_hack',
-                #'cython_ext_modules = cython_setuptools:validate_cython_ext_modules',
+                'ext_modules = setuptools_cython:ext_modules_hack',
+                #'cython_ext_modules = setuptools_cython:validate_cython_ext_modules',
                 ],
 
             },
