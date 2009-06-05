@@ -13,9 +13,6 @@ def validate_cython_ext_modules(dist, attr, value):
         build_cls.sub_commands = sc.items()
 
 class build_cython(Cython.Distutils.build_ext, object):
-    def initialize_options(self):
-        super(build_cython, self).initialize_options()
-
     def finalize_options(self):
         super(build_cython, self).finalize_options()
         self.extensions = self.distribution.cython_ext_modules

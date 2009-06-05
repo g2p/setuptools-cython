@@ -2,46 +2,45 @@
 # vim: set fileencoding=utf-8 sw=4 ts=4 et :
 from setuptools import setup
 
-"""
-Usage:
-Use setuptools and put setuptools_cython in your setup_requires.
-Also paste the monkey-patch reversal below.
+__doc__ = """
+Allows compiling Cython extensions in setuptools
+by putting setuptools_cython in your setup_requires.
 
-setuptools DWIM monkey-patch madness
-http://mail.python.org/pipermail/distutils-sig/2007-September/thread.html#8204
+Usage
+=====
 
-No way but to unpatch, by copying the following code in individual setup scripts:
+Use setuptools, add setuptools_cython to your setup_requires.
 
-import sys
-if 'setuptools.extension' in sys.modules:
-    m = sys.modules['setuptools.extension']
-    m.Extension.__dict__ = m._Extension.__dict__
+Some verbatim code is required to make Extension behave as expected.
 
-Complete example:
+Usage example
+=============
 
-#!/usr/bin/env python
+setup.py::
 
-from setuptools import setup
-from distutils.extension import Extension
+    #!/usr/bin/env python
 
-# setuptools DWIM monkey-patch madness
-# http://mail.python.org/pipermail/distutils-sig/2007-September/thread.html#8204
-import sys
-if 'setuptools.extension' in sys.modules:
-    m = sys.modules['setuptools.extension']
-    m.Extension.__dict__ = m._Extension.__dict__
+    from setuptools import setup
+    from distutils.extension import Extension
 
-setup(
-        name = "example",
-        version = "0.1",
-        description="setuptools_cython example",
-        setup_requires=[
-            'setuptools_cython',
-            ],
-        ext_modules=[
-            Extension('example', ['example.pyx']),
-            ],
-        )
+    # setuptools DWIM monkey-patch madness
+    # http://mail.python.org/pipermail/distutils-sig/2007-September/thread.html#8204
+    import sys
+    if 'setuptools.extension' in sys.modules:
+        m = sys.modules['setuptools.extension']
+        m.Extension.__dict__ = m._Extension.__dict__
+
+    setup(
+            name = "example",
+            version = "0.1",
+            description="setuptools_cython example",
+            setup_requires=[
+                'setuptools_cython',
+                ],
+            ext_modules=[
+                Extension('example', ['example.pyx']),
+                ],
+            )
 
 """
 
@@ -50,10 +49,10 @@ setup(
         version='0.1',
         author='Gabriel de Perthuis',
         author_email='g2p.code@gmail.com',
+        url='http://pypi.python.org/pypi/setuptools_cython/',
         description='Cython setuptools integration',
+        long_description=__doc__,
         license='http://www.gnu.org/licenses/gpl-2.0.html',
-        long_description='Allows using Cython in setuptools projects\n'
-        +'by putting setuptools_cython in your setup_requires.\n',
         py_modules=['setuptools_cython', ],
         install_requires=[
             'Cython',
